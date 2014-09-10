@@ -206,6 +206,7 @@ public class Hello implements EntryPoint {
         personPanel.setWidget(layout);
 
         setupPersonSection();
+        callCountCallService();
         
         RootPanel.get("personContainer").add(personPanel);
 		
