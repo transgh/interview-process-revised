@@ -91,7 +91,7 @@ public class Hello implements EntryPoint {
 	    nameField.setText("Gwt User");
         // We can add style names to widgets
         sendButton.addStyleName("sendButton");
-        
+         
         // Focus the cursor on the name field when the app loads
         nameField.setFocus(true);
         nameField.selectAll();
@@ -120,6 +120,12 @@ public class Hello implements EntryPoint {
             }
         });
         
+        clearPersonButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+		personId.setText("");
+		personName.setText("");
+            }
+        });
 
         // Create a handler for the sendButton and nameField
         class MyHandler implements ClickHandler, KeyUpHandler {
@@ -146,7 +152,7 @@ public class Hello implements EntryPoint {
                 // First, we validate the input.
                 errorLabel.setText("");
                 String textToServer = nameField.getText();
-                if (!FieldVerifier.isValidName(textToServer)) {
+                if (!FieldVerifier.isValidName(textToServer) || textToServer.length()<=4) {
                     errorLabel.setText("Please enter more than 4 caracters");
                     return;
                 }
@@ -241,8 +247,42 @@ public class Hello implements EntryPoint {
 	}
 	
 	private void updatePersonInformation(PersonInfo person){
+		countCallLabel.setText(person.getName());
+	}
+	
+
+	//???
+	/**
+	 * Use the CountCallService to add and show number of call message successfully sent to the server
+	 */
+	public void callCountCallService(){
+	    
+	    countCallButton.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                onCountCallServiceClick();
+            }
+        });
+	    
+	}
+	
+	
+	private void onCountCallServiceClick(){
+	    countCallService.getPerson(personId, new AsyncCallback<PersonInfo>() {
+	        @Override
+	        public void onFailure(Throwable caught) {
+	            caught.printStackTrace();
+	            Window.alert("Error : " + caught.getMessage());
+	        }
+	        public void onSuccess(PersonInfo result) {
+	        	updateCountCallService(result);
+	        };
+	    });
+	}
+	
+	private void updateCountCallService(PersonInfo person){
 		personId.setText(String.valueOf(person.getPersonID()));
 		personName.setText(person.getName());
 	}
-	
+
 }
