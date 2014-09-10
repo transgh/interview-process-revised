@@ -252,12 +252,11 @@ public class Hello implements EntryPoint {
 	}
 	
 
-	//???
+	
 	/**
 	 * Use the CountCallService to add and show number of call message successfully sent to the server
 	 */
 	public void callCountCallService(){
-	    
 	    countCallButton.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -270,6 +269,7 @@ public class Hello implements EntryPoint {
 	
 	private void onCountCallServiceClick(){
 	    // Integer countCall(Integer number);
+	    Integer personId=1;
 	    countCallService.countCall(personId, new AsyncCallback<Integer>() {
 	        @Override
 	        public void onFailure(Throwable caught) {
@@ -283,7 +283,7 @@ public class Hello implements EntryPoint {
 	}
 	
 	private void updateCountCallService(Integer count){
-		countCallLabel.setText(count+"");
+		countCallLabel.setText(count.toString());
 	}
 
 }
