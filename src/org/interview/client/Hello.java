@@ -268,21 +268,21 @@ public class Hello implements EntryPoint {
 	
 	
 	private void onCountCallServiceClick(){
-	    countCallService.getPerson(personId, new AsyncCallback<PersonInfo>() {
+	    // Integer countCall(Integer number);
+	    countCallService.countCall(personId, new AsyncCallback<Integer>() {
 	        @Override
 	        public void onFailure(Throwable caught) {
 	            caught.printStackTrace();
 	            Window.alert("Error : " + caught.getMessage());
 	        }
-	        public void onSuccess(PersonInfo result) {
+	        public void onSuccess(Integer result) {
 	        	updateCountCallService(result);
 	        };
 	    });
 	}
 	
-	private void updateCountCallService(PersonInfo person){
-		personId.setText(String.valueOf(person.getPersonID()));
-		personName.setText(person.getName());
+	private void updateCountCallService(Integer count){
+		countCallLabel.setText(count+"");
 	}
 
 }
