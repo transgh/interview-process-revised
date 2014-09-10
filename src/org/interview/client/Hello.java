@@ -249,7 +249,7 @@ public class Hello implements EntryPoint {
 	}
 	
 	private void updatePersonInformation(PersonInfo person){
-		countCallLabel.setText(person.getName());
+		countCallLabel.setText(person.getName()); 
 	}
 	
 
